@@ -4,7 +4,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
-TOKEN = "8869494633:AAFTi9UySlNxXkjDCY7NR81dFHT4-2EoYP0" # আপনার মূল টোকেনটি কোটেশনের ভেতরে বসাবেন
+TOKEN = os.environ.get("BOT_TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
