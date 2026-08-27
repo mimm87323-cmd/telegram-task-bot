@@ -15,6 +15,16 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # User info save to Supabase database
+    user = update.effective_user
+    supabase.table("users").upsert(
+        {
+            "telegram_id": user.id,
+            "username": user.username or ""
+        },
+        on_conflict="telegram_id"
+    ).execute()
+
     keyboard = [
         ["📋 কাজ দেখুন", "📤 কাজ জমা দিন"],
         ["💰 আমার ব্যালেন্স", "💸 Withdraw"],
