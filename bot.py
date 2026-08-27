@@ -1,11 +1,17 @@
 import os
 from threading import Thread
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from supabase import create_client
 
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 TOKEN = os.environ.get("BOT_TOKEN")
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+# Initialize Supabase Client
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
